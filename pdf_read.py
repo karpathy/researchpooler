@@ -11,7 +11,7 @@ import urllib
 
 def convertPDF(pdf_path, codec='ascii'):
     """
-    Takes path to a PDF and returns the text inside it
+    Takes path to a PDF and returns the text inside it as string
     
     pdf_path: string indicating path to a .pdf file. Can also be a URL starting 
               with 'http'

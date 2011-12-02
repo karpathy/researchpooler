@@ -1,12 +1,12 @@
 """ Functions: useful general utils """
 
-import pickle
+import cPickle
 import re
 from os import startfile
 
 def savePubs(filename, pubs_to_save):
     """ 
-    backup a list of publications
+    save a list of publications into a file using Python's pickle
     filename: string
     pubs_to_save: List of Publication objects
     
@@ -14,7 +14,7 @@ def savePubs(filename, pubs_to_save):
     """
     
     file = open(filename, 'w')
-    pickle.dump(pubs_to_save, file)
+    cPickle.dump(pubs_to_save, file)
     file.close()
 
 def loadPubs(filename):
@@ -25,7 +25,7 @@ def loadPubs(filename):
     """
     
     unpicklefile = open(filename, 'r')
-    pubs = pickle.load(unpicklefile)
+    pubs = cPickle.load(unpicklefile)
     unpicklefile.close()
     return pubs
     
@@ -44,6 +44,7 @@ def openPDFs(pdf_lst):
 def stringToWordDictionary(str):
     """
     Takes a string and returns dictionary that stores frequency of every word.
+    Some stop words are removed.
     
     str: string
     returns dictionary of word counts for each word. Example: d['hello'] -> 5

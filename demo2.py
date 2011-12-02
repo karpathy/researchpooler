@@ -13,7 +13,8 @@ def demo2():
     
     Pre-requisites:
     - Assumes 'pubs_nips' exists. This can be obtained by running 
-      nips_download_parse.py or by downloading it from site. See README.txt
+      nips_download_parse.py or by downloading it from site.
+      (https://sites.google.com/site/researchpooler/home)
     
     Side-effects:
     - will use os call to open a pdf with default program

@@ -9,11 +9,11 @@ def publicationSimilarityNaive(train_pubs, test_pub):
     using a very simple overlap method.
     
     train_pubs: list of publications
-    test_pub: a publication dictionary. Must have key 'pdf_text' with the 
+    test_pub: a publication to compare to. Must contain 'pdf_text' key with the 
               bag of words that occur in that publication
     
     returns list of (scores, one for each of the train_pubs. Returns -1 for
-            any score where a publication does not have the pdf_text available
+            any score where a publication does not have the pdf_text available.
     """
     
     if not test_pub.has_key('pdf_text'): 

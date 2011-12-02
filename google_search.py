@@ -1,5 +1,5 @@
 """
-Functions for searching Google and retrieving urls
+Functions for searching Google and retrieving urls to PDFs
 """
 
 import urllib
@@ -8,7 +8,8 @@ import simplejson
 def getPDFURL(pdf_title):
     """
     Search google for exact match of the title of this paper 
-    and return the url to the pdf file.
+    and return the url to the pdf file, or 'notfound' if no exact match was 
+    found.
     
     pdf_title: string, name of the paper.
     Returns url to the PDF, or 'notfound' if unsuccessful

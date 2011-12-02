@@ -16,7 +16,7 @@ def demo1():
     - Assumes 'pubs_nips' exists and that pdf text is present. 
       This can be obtained by running 
       nips_download_parse.py and then nips_add_pdftext.py, or by downloading it 
-      from site. See README.txt
+      from site (https://sites.google.com/site/researchpooler/home)
     
     Side-effects:
     - will use os call to open a pdf with default program
