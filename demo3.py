@@ -15,7 +15,8 @@ def demo3():
                                           very basic and could be much improved)
     
     Pre-requisites:
-    - Assumes 'pubs_nips' exists. This can be obtained by running 
+    - Assumes 'pubs_nips' exists and contains pdf text inside 
+      (under key 'pdf_text'). This can be obtained by running 
       nips_download_parse.py and then nips_add_pdftext.py 
       or by downloading it from site. See README.txt
     
@@ -32,7 +33,7 @@ def demo3():
     p = {'pdf_text' : bow} #create a dummy publication dict
     
     # calculate similarities to our publications
-    print 'loading database...'
+    print "loading database..."
     pubs = loadPubs('pubs_nips')
     print "computing similarities. (may take while with current implementation)"
     scores = publicationSimilarityNaive(pubs, p)

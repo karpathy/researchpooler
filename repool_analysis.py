@@ -24,7 +24,7 @@ def publicationSimilarityNaive(train_pubs, test_pub):
     words = test_pub['pdf_text'].keys()
     
     for i,p in enumerate(train_pubs):
-        if(i%100==0): print "%d/%d" % (i+1, len(train_pubs))
+        if(i%100==0): print "%d/%d..." % (i, len(train_pubs))
         
         if not p.has_key('pdf_text'): continue
         

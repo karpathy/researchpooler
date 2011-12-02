@@ -19,14 +19,15 @@ def demo2():
     - will use os call to open a pdf with default program
     """
     
+    print "loading the NIPS publications dataset..."
     pubs = loadPubs('pubs_nips')
     
     # get urls that correspond to publications with deep in title
     p = [x['pdf'] for x in pubs if 'deep' in x['title'].lower()]
     
-    if len(p)>10:
-        p=p[:10]
-        print 'oops too many (%d) results! Only opening random 10.' % (len(p),)
+    if len(p)>5:
+        print "oops too many (%d) results! Only opening random 5." % (len(p),)
+        p=p[:5]
         
     openPDFs(p)
     

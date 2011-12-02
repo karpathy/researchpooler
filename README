@@ -1,5 +1,6 @@
 REsearch POOLer (repool) 
-v0.1
+Project site: https://sites.google.com/site/researchpooler/home
+
 Authors: Andrej Karpathy <karpathy@cs.stanford.edu> || <andrej.karpathy@gmail.com>, http://cs.stanford.edu/~karpathy/
 
 -------------------------------------------------------------------------------
@@ -20,17 +21,21 @@ STAGE 4 files: create nice web-based UI (maybe using Google App Engine?) to make
 -------------------------------------------------------------------------------
 INSTALLATION
 -------------------------------------------------------------------------------
-Simply download scripts and browse around since the project is young. Unless you want to run the scripts from scratch to generate the NIPS database, download the database file pubs_nips directly from Downloads section here.
-
-Current external Python dependencies:
+1. Download pubs_nips from the site[*] (https://sites.google.com/site/researchpooler/downloads)
+2. Browse around (project is young, no installation needed so far!)
+3. Download/Install current Python dependencies:
 
 BeautifulSoup   [for easy and robust HTML parsing]
-simplejson      [for parsing outputs of Google searches using their API]
 PDFMiner        [for parsing PDFs and extracting text]
+simplejson      [OPTIONAL. for parsing outputs of Google searches using their API]
 
-Note that even if you are missing some of the above, you may still be able to use large
-portion of the library functions.
+4. Enjoy the demos
 
+[*] Instead of downloading the database you can also regenerate the pubs_nips database yourself using the two scripts I wrote. Simply run:
+$> python nips_download_parse.py
+(takes a few seconds) and then
+$> python nips_add_pdftext.py
+(takes potentially an hour or two because it has to download and parse all papers published at NIPS since 2003)
 -------------------------------------------------------------------------------
 EXAMPLE USAGE
 -------------------------------------------------------------------------------
