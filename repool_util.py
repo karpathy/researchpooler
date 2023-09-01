@@ -1,6 +1,6 @@
 """ Functions: useful general utils """
 
-import cPickle
+import _pickle as cPickle
 import re
 from os import startfile
 
@@ -13,7 +13,7 @@ def savePubs(filename, pubs_to_save):
     returns nothing
     """
     
-    file = open(filename, 'w')
+    file = open(filename, 'wb')
     cPickle.dump(pubs_to_save, file)
     file.close()
 
@@ -23,11 +23,15 @@ def loadPubs(filename):
     filename: string
     returns list of dictionaries, each representing a Publication
     """
-    
-    unpicklefile = open(filename, 'r')
-    pubs = cPickle.load(unpicklefile)
-    unpicklefile.close()
-    return pubs
+    try:
+        unpicklefile = open(filename, 'rb')
+        pubs = cPickle.load(unpicklefile)
+        unpicklefile.close()
+        return pubs
+    except (EOFError, FileNotFoundError) as e:
+        print(f"Error loading {filename}: {e}")
+        return []  # Return an empty list or handle the error as needed
+
     
 def openPDFs(pdf_lst):
     """
@@ -35,7 +39,7 @@ def openPDFs(pdf_lst):
     pdf_lst: list of strings: paths (or urls) of pdfs to open
     """
     if len(pdf_lst)>10:
-        print "more than 10? that can't be right. Request denied."
+        print ("more than 10? that can't be right. Request denied.")
         return
         
     for x in pdf_lst:

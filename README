@@ -21,21 +21,13 @@ STAGE 4 files: create nice web-based UI (maybe using Google App Engine?) to make
 -------------------------------------------------------------------------------
 INSTALLATION
 -------------------------------------------------------------------------------
-1. Download pubs_nips from the site[*] (https://sites.google.com/site/researchpooler/downloads)
-2. Browse around (project is young, no installation needed so far!)
-3. Download/Install current Python dependencies:
+pip install requirements.txt
+python nips_download_parse.py
+python nips_add_pdftext.py
 
-BeautifulSoup   [for easy and robust HTML parsing]
-PDFMiner        [for parsing PDFs and extracting text]
-simplejson      [OPTIONAL. for parsing outputs of Google searches using their API]
-
-4. Enjoy the demos
-
-[*] Instead of downloading the database you can also regenerate the pubs_nips database yourself using the two scripts I wrote. Simply run:
-$> python nips_download_parse.py
-(takes a few seconds) and then
-$> python nips_add_pdftext.py
-(takes potentially an hour or two because it has to download and parse all papers published at NIPS since 2003)
+-------------------------------------------------------------------------------
+RUN using 'python demo1.py'
+-------------------------------------------------------------------------------
 -------------------------------------------------------------------------------
 EXAMPLE USAGE
 -------------------------------------------------------------------------------
