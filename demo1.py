@@ -1,44 +1,49 @@
-"""
-Some examples of fun things that can be done using the current 'API'
-"""
+import webbrowser
+import requests
+from bs4 import BeautifulSoup
+from repool_util import loadPubs
 
-from repool_util import loadPubs, openPDFs
 
-def demo1():
-    """
-    You wrote an algorithm and benchmarked it on the MNIST dataset. You are 
-    wondering how your results compare with those in the literature:
-    1. Finds all publications that mention mnist
-    2. Print out their titles
-    3. Open the three latest publications that mention it at least twice
-    
-    Pre-requisites:
-    - Assumes 'pubs_nips' exists and that pdf text is present. 
-      This can be obtained by running 
-      nips_download_parse.py and then nips_add_pdftext.py, or by downloading it 
-      from site (https://sites.google.com/site/researchpooler/home)
-    
-    Side-effects:
-    - will use os call to open a pdf with default program
-    """
-    
-    print "loading the NIPS publications dataset..."
-    pubs = loadPubs('pubs_nips')
-    
-    # get all papers that mention mnist
-    p = [x for x in pubs if 'mnist' in x.get('pdf_text',{})]
-    print "titles of papers that mention MNIST dataset:"
-    for x in p:
-        print x['title']
-    print "total of %d publications mention MNIST." %(len(p),)
-    
-    # sort by number of occurences
-    occ = [(x['year'], x['pdf']) for i,x in enumerate(p) if x['pdf_text']['mnist']>1]
-    occ.sort(reverse = True)
-    
-    # open the top 3 latest in browser
-    print "opening the top 3..."
-    openPDFs([x for year,x in occ[:3]])
+def lookup(titles):
+    for title in titles:
+        search_url = f"https://www.google.com/search?q={title}"
+        try:
+            response = requests.get(search_url)
+            response.raise_for_status()
 
-if __name__ == '__main__':
-    demo1()
+            # Parse the search results page using BeautifulSoup.
+            soup = BeautifulSoup(response.text, 'html.parser')
+
+            # Find the first search result link and open it in the default web browser.
+            search_results = soup.find_all("a")
+            for result in search_results:
+                if result.get("href").startswith("/url?q="):
+                    first_result_url = result.get("href")[7:].split('&')[0]  # Extract the URL.
+                    webbrowser.open(first_result_url, new=2)
+                    break  # Stop after opening the first result.
+            else:
+                print(f"No search results found for '{title}'")
+        except Exception as e:
+            print(f"Error opening the browser: {str(e)}")
+
+
+options = ['venue', 'title', 'authors']
+search_in = input("Choose what to search for " + str(options) + ": ").strip().lower()
+
+if search_in not in options:
+    print(f"Invalid option. Please choose from {', '.join(options)}")
+else:
+    word = input("Enter the word to search for: ").strip()
+
+    if word:
+        pubs = loadPubs('pubs_nips')
+        google_it = 'title'
+        p = [x[google_it] for x in pubs if word.lower() in x.get(search_in, '').lower()]
+
+        if p:
+            print(f"Number of results found: {len(p)}")
+            lookup(p)
+        else:
+            print('No results found for your search.')
+    else:
+        print('Please enter a word to search for.')
